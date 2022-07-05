@@ -1,5 +1,6 @@
 # name=Zoom R16
 
+import transport
 import ui
 
 
@@ -23,8 +24,17 @@ def OnNoteOn(event):
     event.handled = True
     # If the key was pressed
     if event.controlVal == 127:
+        # Stop
+        if event.controlNum == 93:
+            transport.stop()
+        # Play
+        elif event.controlNum == 94:
+            transport.start()
+        # Record
+        elif event.controlNum == 95:
+            transport.record()
         # Up Arrow
-        if event.controlNum == 96:
+        elif event.controlNum == 96:
             ui.up()
         # Down Arrow
         elif event.controlNum == 97:
