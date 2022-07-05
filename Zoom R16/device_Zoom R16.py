@@ -19,6 +19,12 @@ def OnNoteOn(event):
     Handles all keys.
     """
     event.handled = True
+    # If the key was pressed
+    if event.controlVal == 127:
+        pass
+    # If the key was released
+    elif event.controlVal == 0:
+        pass
 
 
 def OnPitchBend(event):
