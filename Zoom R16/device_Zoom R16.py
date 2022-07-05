@@ -1,5 +1,7 @@
 # name=Zoom R16
 
+import ui
+
 
 def OnControlChange(event):
     """
@@ -21,7 +23,18 @@ def OnNoteOn(event):
     event.handled = True
     # If the key was pressed
     if event.controlVal == 127:
-        pass
+        # Up Arrow
+        if event.controlNum == 96:
+            ui.up()
+        # Down Arrow
+        elif event.controlNum == 97:
+            ui.down()
+        # Left Arrow
+        elif event.controlNum == 98:
+            ui.left()
+        # Right Arrow
+        elif event.controlNum == 99:
+            ui.right()
     # If the key was released
     elif event.controlVal == 0:
         pass
