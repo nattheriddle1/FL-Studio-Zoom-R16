@@ -24,8 +24,16 @@ def OnNoteOn(event):
     event.handled = True
     # If the key was pressed
     if event.controlVal == 127:
+        # Rewind
+        if event.controlNum == 91:
+            # Start rewinding
+            transport.rewind(2)
+        # Fast-forward
+        elif event.controlNum == 92:
+            # Start fast-forwarding
+            transport.fastForward(2)
         # Stop
-        if event.controlNum == 93:
+        elif event.controlNum == 93:
             transport.stop()
         # Play
         elif event.controlNum == 94:
@@ -47,7 +55,14 @@ def OnNoteOn(event):
             ui.right()
     # If the key was released
     elif event.controlVal == 0:
-        pass
+        # Rewind
+        if event.controlNum == 91:
+            # Stop rewinding
+            transport.rewind(0)
+        # Fast-forward
+        elif event.controlNum == 92:
+            # Stop fast-forwarding
+            transport.fastForward(0)
 
 
 def OnPitchBend(event):
