@@ -58,6 +58,19 @@ def OnNoteOn(event):
                     channels.selectedChannel() +
                     event.controlNum - 8
                 )
+            # If a plugin is focused
+            elif ui.getFocused(5):
+                id_ = ui.getFocusedFormID()
+                name = ui.getFocusedPluginName()
+                # If a generator plugin is focused
+                if ui.getFocused(7):
+                    if name == "Sakura":
+                        # Toggle the resonators
+                        plugins.setParamValue(
+                            float(not bool(plugins.getParamValue(
+                                event.controlNum + 47, id_))),
+                            event.controlNum + 47, id_
+                        )
         # Previous Bank, 1-8Tr
         elif event.controlNum == 46:
             # If the channel rack is focused
