@@ -1,6 +1,8 @@
 # name=Zoom R16
 
 import arrangement
+import channels
+import mixer
 import transport
 import ui
 
@@ -25,8 +27,24 @@ def OnNoteOn(event):
     event.handled = True
     # If the key was pressed
     if event.controlVal == 127:
+        # Status keys
+        if 8 <= event.controlNum <= 15:
+            # If the mixer is focused
+            if ui.getFocused(0):
+                # Toggle the mute status of the current mixer track
+                mixer.muteTrack(
+                    mixer.trackNumber() +
+                    event.controlNum - 8
+                )
+            # If the channel rack is focused
+            elif ui.getFocused(1):
+                # Toggle the mute status of the current channel
+                channels.muteChannel(
+                    channels.selectedChannel() +
+                    event.controlNum - 8
+                )
         # Auto Punch I/O
-        if event.controlNum == 54:
+        elif event.controlNum == 54:
             pass
         # A-B Repeat
         elif event.controlNum == 55:
