@@ -135,3 +135,19 @@ def OnPitchBend(event):
     Handles all faders.
     """
     event.handled = True
+    # If the mixer is focused
+    if ui.getFocused(0):
+        # Control the mixer faders
+        mixer.setTrackVolume(
+            0 if event.midiChan == 8 else
+            mixer.trackNumber() + event.midiChan,
+            (event.controlVal / 127), 1
+        )
+    # If the channel rack is focused
+    elif ui.getFocused(1):
+        # Control the channel volume knobs
+        channels.setChannelVolume(
+            channels.selectedChannel() +
+            event.midiChan,
+            event.controlVal / 100, 1
+        )
