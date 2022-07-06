@@ -7,6 +7,20 @@ import transport
 import ui
 
 
+def _previous(index: int, divisor: int, minimum: int) -> int:
+    return max((
+        index // divisor
+        if index % divisor
+        else index // divisor - 1
+    ) * divisor, minimum)
+
+
+def _next(index: int, divisor: int, maximum: int) -> int:
+    return min((
+        index // divisor + 1
+    ) * divisor, maximum)
+
+
 def OnControlChange(event):
     """
     Handles the dial.
