@@ -71,6 +71,22 @@ def OnNoteOn(event):
                                 event.controlNum + 47, id_))),
                             event.controlNum + 47, id_
                         )
+                # If an effects plugin is focused
+                elif ui.getFocused(6):
+                    index = mixer.trackNumber()
+                    slot = (id_ - index * 4194304) // 65536
+                    if name in {"Fruity parametric EQ",
+                                "Fruity parametric EQ 2"}:
+                        value = plugins.getParamValue(
+                            event.controlNum + 13,
+                            index, slot
+                        )
+                        # Cycle through the equalizer handle types
+                        plugins.setParamValue(
+                            value + 1/7 if value < 1 else 0,
+                            event.controlNum + 13,
+                            index, slot
+                        )
         # Previous Bank, 1-8Tr
         elif event.controlNum == 46:
             # If the channel rack is focused
