@@ -33,10 +33,10 @@ def OnNoteOn(event):
             pass
         # Go to previous marker
         elif event.controlNum == 56:
-            pass
+            arrangement.jumpToMarker(-1, 0)
         # Go to next marker
         elif event.controlNum == 57:
-            pass
+            arrangement.jumpToMarker(+1, 0)
         # Mark/Clear
         elif event.controlNum == 58:
             pass
