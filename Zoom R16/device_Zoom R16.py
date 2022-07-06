@@ -165,3 +165,9 @@ def OnPitchBend(event):
                         event.controlVal / 100,
                         event.midiChan + 10, id_
                     )
+            elif name == "Sakura":
+                # Control the 8 resonator frequency sliders
+                plugins.setParamValue(
+                    event.controlVal / 100,
+                    event.midiChan + 39, id_
+                )
