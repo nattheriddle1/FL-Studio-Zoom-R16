@@ -1,5 +1,6 @@
 # name=Zoom R16
 
+import arrangement
 import transport
 import ui
 
@@ -24,8 +25,23 @@ def OnNoteOn(event):
     event.handled = True
     # If the key was pressed
     if event.controlVal == 127:
+        # Auto Punch I/O
+        if event.controlNum == 54:
+            pass
+        # A-B Repeat
+        elif event.controlNum == 55:
+            pass
+        # Go to previous marker
+        elif event.controlNum == 56:
+            pass
+        # Go to next marker
+        elif event.controlNum == 57:
+            pass
+        # Mark/Clear
+        elif event.controlNum == 58:
+            pass
         # Rewind
-        if event.controlNum == 91:
+        elif event.controlNum == 91:
             # Start rewinding
             transport.rewind(2)
         # Fast-forward
