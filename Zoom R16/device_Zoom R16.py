@@ -156,6 +156,7 @@ def OnPitchBend(event):
     elif ui.getFocused(5):
         id_ = ui.getFocusedFormID()
         name = ui.getFocusedPluginName()
+        # If a generator plugin is focused
         if ui.getFocused(7):
             if name == "FLEX":
                 # Only 8 sliders, so exclude master
@@ -171,3 +172,18 @@ def OnPitchBend(event):
                     event.controlVal / 100,
                     event.midiChan + 39, id_
                 )
+        # If an effects plugin is focused
+        elif ui.getFocused(6):
+            index = mixer.trackNumber()
+            slot = (id_ - index * 4194304) // 65536
+            if name in {"Fruity parametric EQ",
+                        "Fruity parametric EQ 2",
+                        "Fruity 7 Band Equalizer"}:
+                # Only 7 sliders, so exclude 8 and master
+                if 0 <= event.midiChan <= 6:
+                    # Control the 7 equalizer handles
+                    plugins.setParamValue(
+                        event.controlVal / 100,
+                        event.midiChan,
+                        index, slot
+                    )
