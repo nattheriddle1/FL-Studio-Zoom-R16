@@ -3,6 +3,7 @@
 import arrangement
 import channels
 import mixer
+import plugins
 import transport
 import ui
 
@@ -151,3 +152,16 @@ def OnPitchBend(event):
             event.midiChan,
             event.controlVal / 100, 1
         )
+    # If a plugin is focused
+    elif ui.getFocused(5):
+        id_ = ui.getFocusedFormID()
+        name = ui.getFocusedPluginName()
+        if ui.getFocused(7):
+            if name == "FLEX":
+                # Only 8 sliders, so exclude master
+                if 0 <= event.midiChan <= 7:
+                    # Control the 8 macro sliders
+                    plugins.setParamValue(
+                        event.controlVal / 100,
+                        event.midiChan + 10, id_
+                    )
