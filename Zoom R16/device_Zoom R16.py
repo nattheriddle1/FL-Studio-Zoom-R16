@@ -57,6 +57,23 @@ def OnNoteOn(event):
                     channels.selectedChannel() +
                     event.controlNum - 8
                 )
+        # Previous Bank, 1-8Tr
+        elif event.controlNum == 46:
+            # If the channel rack is focused
+            if ui.getFocused(1):
+                # Move to the previous block of 8 channels
+                channels.selectOneChannel(
+                    _previous(channels.selectedChannel(), 8, 0)
+                )
+        # Next Bank, 9-16Tr
+        elif event.controlNum == 47:
+            # If the channel rack is focused
+            if ui.getFocused(1):
+                # Move to the next block of 8 channels
+                channels.selectOneChannel(
+                    _next(channels.selectedChannel(),
+                          8, channels.channelCount()-1)
+                )
         # Auto Punch I/O
         elif event.controlNum == 54:
             pass
